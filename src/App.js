@@ -9,6 +9,7 @@ import Header from './components/Header';
 export default () => {
   const [movieList, setMovieList] = useState([]);
   const [featuredData, setFeaturedData] = useState(null);
+  const [blackHeader, setBlackHeader] = useState(false);
 
   useEffect(()=>{
     const loadAll = async () => {
@@ -28,11 +29,29 @@ export default () => {
     loadAll();
   }, []);
 
+  useEffect(()=> {
+    const scrollListener = () => {
+      if(window.scrollY >10) {
+        setBlackHeader(true);
+      } else {
+        setBlackHeader(false);
+      }
+    }
+
+    window.addEventListener('scroll', scrollListener);
+
+    return () => {
+      window.removeEventListener('scroll', scrollListener);
+    }
+
+  }, []);
+
   return (
     
     <div className="page">
 
-      <Header />
+      <Header black={blackHeader} />
+
 
       {featuredData &&
         <FeaturedMovie item={featuredData}/>
@@ -44,6 +63,12 @@ export default () => {
           <MovieRow key = {key} title={item.title} items={item.items}/>
         ))}
       </section>
+
+      <footer>
+        Feito para estudos. <br/>
+        Direitos de imagens da Netflix. <br/>
+        Dados pegos pela API oferecida pelo site themoviedb.org.
+      </footer>
       
     </div>
   )

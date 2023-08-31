@@ -6,29 +6,82 @@
     margin: 0px 0px 0px 30px;
 }
 
+.movieRow--setaDireita ,
+.movieRow--setaEsquerda {
+    max-height: 500px;
+} 
+
+.movieRow--setaDireita ,
+.movieRow--setaEsquerda {
+    position: absolute;
+    width: 40px;
+    height: 225px;
+    background-color: rgba(0,0,0,0.6);
+    z-index: 99;
+    display: flex;
+    align-items: center;
+    justify-items: center;
+    overflow: hidden;
+    cursor: pointer;
+    opacity: 0;
+    transition: all ease 0.2s;
+}
+
+.movieRow--setaEsquerda {
+    left: 0;
+}
+
+.movieRow--setaDireita {
+    right: 0;
+
+}
+
+.movieRow:hover .movieRow--setaDireita,
+.movieRow:hover .movieRow--setaEsquerda {
+    opacity: 1;
+}
+
+
 .movieRow--listaarea {
     overflow-x: hidden;
     padding-left: 30px;
+    transition: all ease 0.2s;
 }
 
 .movieRow--list {
-    width: 999999px;
-
+    transition: all ease 0.8s;
 }
 
 .movieRow--item {
     display: inline-block;
     width: 150px;
     cursor: pointer;
+
 }
 
 .movieRow--item img {
     width: 100%;
     transform: scale(0.9);
     transition: all ease 0.2s;
+    filter: brightness(0.5);
+
 }
+
 
 .movieRow--item img:hover {
     transform: scale(1);
+    filter: brightness(1);
+}
+
+@media (max-width:760px) {
+    .movieRow--setaDireita,
+    .movieRow--setaEsquerda {
+        opacity: 1;
+    }
+
+    .movieRow--item img {
+        filter: brightness(1);
+    
+    }
 
 }
